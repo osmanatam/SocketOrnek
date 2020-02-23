@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>
+</head>
+<body>
+    <div id="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ad</th>
+                <th scope="col">Yönetmen</th>
+                <th scope="col">İşlem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="1">
+                <th scope="row">1</th>
+                <td>Truman Show</td>
+                <td>Peter Weir</td>
+                <td><button>Sil</button></td>
+              </tr>
+              <tr id="2">
+                <th scope="row">2</th>
+                <td>Kill Bill - 1</td>
+                <td>Tarantino</td>
+                <td><button>Sil</button></td>
+              </tr>
+              <tr id="3">
+                <th scope="row">3</th>
+                <td>Tosunpaşa</td>
+                <td>Yavuz Turgul</td>
+                <td><button>Sil</button></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</body>
+</html>
+<script>
+        var socket = io.connect("http://localhost:3000");
+        $("button").click(function(){
+           var id =  $(this).parent().parent().attr("id");
+           socket.emit("serverdelete",id);
+        })
+
+        socket.on("clientdelete",(data)=>{
+            $("#" + data).fadeOut();
+        })
+</script>

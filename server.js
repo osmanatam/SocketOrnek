@@ -12,6 +12,11 @@ io.on('connection',(socket)=>{
     socket.on("servermsg",(data)=>{
         console.log(data);
         io.emit("clientmsg",data);
+    });
+
+
+    socket.on("serverdelete",(data) => {
+        io.emit("clientdelete",data)
     })
 
 });
