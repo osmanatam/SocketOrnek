@@ -5,6 +5,10 @@ var io = require('socket.io')(http);
 
 io.on('connection',(socket)=>{
 
+    socket.on("disconnect",()=>{
+        console.log("disconnect!!")
+    })
+
     socket.on("bodychange",()=>{
         io.emit("clientchange");
     })
